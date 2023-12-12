@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+
+<!-- memberMapper.xml -->
+<mapper namespace="com.itwillbs.mapper.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="insertMember">
+		INSERT INTO tbl_member(userid,userpw,username,useremail)
+		VALUES (#{userid},#{userpw},#{username},#{useremail})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="loginMember" resultType="com.itwillbs.domain.MemberVO">
+		SELECT *
+		FROM tbl_member
+		WHERE userid = #{userid}
+		AND userpw = #{userpw}
+	</select>
+	
+	<!-- 회원정보조회 -->
+	<select id="getInfoMember" resultType="MemberVO">
+		SELECT *
+		FROM tbl_member
+		WHERE userid = #{userid}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<insert id="updateMember">
+		UPDATE tbl_member 
+		SET username = #{username}, useremail = #{useremail}, updatedate=now() 
+		WHERE userid = #{userid}
+		AND userpw = #{userpw}
+	</insert>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember">
+		DELETE FROM tbl_member
+		WHERE userid = #{userid}
+		AND userpw = #{userpw}
+	</delete>
+	
+	<!-- 회원목록조회 -->
+	<select id="getMemberList" resultType="MemberVO">
+		SELECT *
+		FROM tbl_member
+	</select>
+</mapper>
